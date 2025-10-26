@@ -6,6 +6,7 @@ const currentRender = document.querySelector(".current-operation");
 const btnNumbersAll = document.querySelectorAll(".number")
 const btnOperatorAll = document.querySelectorAll(".operator")
 
+
 //eventListener on all numbers buttons & append numbers to display
 btnNumbersAll.forEach((button)=>{
     button.addEventListener("click",()=>{
