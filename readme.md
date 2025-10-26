@@ -1,19 +1,26 @@
-// operators = (+ - * / % c x =)
-// current number = 0-9
-// previous number = 0-9
+🧮 Modern Calculator App
+A sleek, responsive calculator built with pure Vanilla JavaScript, featuring glassmorphism design and smooth animations.
 
-// calculatorFunction = (curr,prev,op)=>{
-    return one value;
-}
+✨ Features
+Basic Operations: Addition, Subtraction, Multiplication, Division
 
-----------
-// 1. المتغيرات العالمية
-// 2. دالة updateDisplay()
-// 3. دالة appendNumber()
-// 4. Event listeners للأرقام
-// 5. دالة chooseOperation()
-// 6. Event listeners للعمليات
-// 7. دالة calculate()
-// 8. Event listener لزر المساواة
-// 9. دوال clear(), deleteNumber(), appendDecimal()
-// 10. التحسينات والأخطاء
+Advanced Features: Percentage calculations, Decimal support
+
+Smart UI: Glass morphism design with smooth animations
+
+Responsive: Works perfectly on desktop and mobile devices
+
+Keyboard Support: Use your keyboard for calculations
+
+Error Handling: Graceful error management for invalid operations
+
+🛠️ Technologies Used
+HTML5 - Semantic structure
+
+CSS3 - Modern styling with Glassmorphism effects
+
+Vanilla JavaScript - No frameworks or libraries
+
+CSS Grid & Flexbox - Responsive layout
+
+CSS Animations - Smooth transitions and effects
