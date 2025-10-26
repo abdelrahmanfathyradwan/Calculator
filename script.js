@@ -1,15 +1,4 @@
-const btn_7 = document.getElementById("7");
-const btn_8 = document.getElementById("8");
-const btn_9 = document.getElementById("9");
-const btn_4 = document.getElementById("4");
-const btn_5 = document.getElementById("5");
-const btn_6 = document.getElementById("6");
-const btn_1 = document.getElementById("1");
-const btn_2 = document.getElementById("2");
-const btn_3 = document.getElementById("3");
-const btn_0 = document.getElementById("0");
 const clearBtn = document.querySelector(".clear");
-const deleteBtn = document.querySelector(".delete");
 const decimalBtn = document.querySelector(".decimal");
 const equalsBtn = document.querySelector(".equals");
 const previousRender= document.querySelector(".previous-operation");
