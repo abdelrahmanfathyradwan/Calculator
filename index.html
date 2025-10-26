@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favico.jpeg"/>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <!-- الشاشة -->
+            <div class="screen">
+                <div class="previous-operation">0</div>
+                <div class="current-operation"></div>
+            </div>
+            
+            <!-- الأزرار -->
+            <div class="buttons">
+                <!-- الصف الأول -->
+                <button class="btn clear" data-action="clear">C</button>
+                <button class="btn delete" onclick="deleteLastNum()" data-action="delete">⌫</button>
+                <button class="btn operator" data-action="percent">%</button>
+                <button class="btn operator" data-action="divide">÷</button>
+                
+                <!-- الصف الثاني -->
+                <button class="btn number" id="7">7</button>
+                <button class="btn number" id="8">8</button>
+                <button class="btn number" id="9">9</button>
+                <button class="btn operator" data-action="multiply">×</button>
+                
+                <!-- الصف الثالث -->
+                <button class="btn number" id="4">4</button>
+                <button class="btn number" id="5">5</button>
+                <button class="btn number" id="6">6</button>
+                <button class="btn operator" data-action="subtract">−</button>
+                
+                <!-- الصف الرابع -->
+                <button class="btn number" id="1">1</button>
+                <button class="btn number" id="2">2</button>
+                <button class="btn number" id="3">3</button>
+                <button class="btn operator" data-action="add">+</button>
+                
+                <!-- الصف الخامس -->
+                <button class="btn number zero" id="0">0</button>
+                <button class="btn decimal" data-action="decimal">.</button>
+                <button class="btn equals" data-action="equals">=</button>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

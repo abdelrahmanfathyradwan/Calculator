@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calculator-container {
+    perspective: 1000px;
+}
+
+.calculator {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+    animation: calculatorEntrance 0.8s ease-out;
+}
+
+@keyframes calculatorEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(-30deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* الشاشة */
+.screen {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    animation: screenGlow 3s infinite;
+}
+
+@keyframes screenGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.previous-operation.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.current-operation,.previous-operation {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 300;
+    word-wrap: break-word;
+    transition: all 0.3s ease;
+}
+
+/* شبكة الأزرار */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+/* الأنماط العامة للأزرار */
+.btn {
+    border: none;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:active {
+    transform: translateY(2px) scale(0.98);
+    box-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* أزرار الأرقام */
+.btn.number {
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    color: white;
+    animation: numberButtonEntrance 0.6s ease-out backwards;
+}
+
+.btn.number:hover {
+    background: linear-gradient(135deg, #5a6578, #3d4758);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn.number:nth-child(4n+1) { animation-delay: 0.1s; }
+.btn.number:nth-child(4n+2) { animation-delay: 0.2s; }
+.btn.number:nth-child(4n+3) { animation-delay: 0.3s; }
+.btn.number:nth-child(4n+4) { animation-delay: 0.4s; }
+
+@keyframes numberButtonEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* أزرار العمليات */
+.btn.operator {
+    background: linear-gradient(135deg, #f6ad55, #ed8936);
+    color: white;
+    animation: operatorButtonEntrance 0.6s ease-out backwards;
+    width: 80px;
+}
+
+.btn.operator:hover {
+    background: linear-gradient(135deg, #fbd38d, #f6ad55);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.btn.operator:nth-child(4n+1) { animation-delay: 0.15s; }
+.btn.operator:nth-child(4n+2) { animation-delay: 0.25s; }
+.btn.operator:nth-child(4n+3) { animation-delay: 0.35s; }
+.btn.operator:nth-child(4n+4) { animation-delay: 0.45s; }
+
+@keyframes operatorButtonEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) rotate(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+}
+
+/* زر المساواة */
+.btn.equals {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    grid-column: span 1;
+    animation: equalsButtonEntrance 0.8s ease-out;
+}
+
+.btn.equals:hover {
+    background: linear-gradient(135deg, #68d391, #48bb78);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(72, 187, 120, 0.4);
+}
+
+@keyframes equalsButtonEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* أزرار خاصة */
+.btn.clear {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+    color: white;
+}
+
+.btn.clear:hover {
+    background: linear-gradient(135deg, #fc8181, #f56565);
+}
+
+.btn.delete {
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+    color: white;
+}
+
+.btn.delete:hover {
+    background: linear-gradient(135deg, #f6ad55, #ed8936);
+}
+
+/* زر الصفر */
+.btn.zero {
+    grid-column: span 2;
+}
+
+/* تأثيرات النقر */
+.btn.clicked {
+    animation: buttonClick 0.3s ease;
+}
+
+@keyframes buttonClick {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* تأثيرات الظل المتحرك */
+.calculator::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    z-index: -1;
+    filter: blur(10px);
+    animation: shadowPulse 4s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+    0%, 100% { opacity: 0.5; transform: translateY(0); }
+    50% { opacity: 0.8; transform: translateY(-5px); }
+}
+
+/* تصميم متجاوب */
+@media (max-width: 480px) {
+    .calculator {
+        padding: 15px;
+        border-radius: 20px;
+    }
+    
+    .btn {
+        min-height: 60px;
+        font-size: 1.1rem;
+        border-radius: 12px;
+    }
+    
+    .current-operation {
+        font-size: 2rem;
+    }
+    
+    .buttons {
+        gap: 10px;
+    }
+}
+
+/* تأثيرات إضافية */
+.btn.pulse {
+    animation: pulseEffect 0.5s ease;
+}
+
+@keyframes pulseEffect {
+    0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(102, 126, 234, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+}
